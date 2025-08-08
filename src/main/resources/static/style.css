@@ -1,0 +1,80 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-image: linear-gradient(to bottom right, skyblue, mediumturquoise);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+main {
+    flex-grow: 1;
+    background-color: aliceblue;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+article {
+    border-width: thin;
+    border-color: slategray;
+    border-style: solid;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    padding: 2rem;
+}
+
+footer {
+    background-color: seashell;
+    padding: 2rem;
+}
+
+h1 {
+    white-space: nowrap;
+    text-align: center;
+    color: rgb(255, 90, 30);
+    font-size: 72px;
+    font-family: "Times New Roman", serif;
+}
+
+h2 {
+    color: rgb(255, 90, 30);
+    font-size: 56px;
+}
+
+h3 {
+    color: coral;
+    font-size: 32px;
+}
+
+p {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: black;
+    line-height: 165%;
+    font-size: 24px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+img {
+    float: right;
+    border-width: thick;
+    border-color: coral;
+    border-style: solid;
+    margin-left: 1rem;
+}
+
+.topnav a {
+    text-align: center;
+    padding: 14px 16px;
+    overflow: hidden;
+    color: coral;
+    text-indent: 2rem;
+    text-decoration: none;
+    font-size: 32px;
+}

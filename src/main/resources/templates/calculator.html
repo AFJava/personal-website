@@ -18,7 +18,13 @@
         </header>
         
         <main>
-            
+            <form th:action = "@{/calculator}" method = "post">
+                Function: <input type = "text" name = "function">
+                Derivative: <input type = "text" name = "derivative">
+                Starting point: <input type = "number" name = "value">
+                Iterations <input type = "number" name = "iterations">
+                <button type = "submit">Run</button>
+            </form>
         </main>
 
         

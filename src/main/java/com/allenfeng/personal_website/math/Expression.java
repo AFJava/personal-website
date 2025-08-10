@@ -15,7 +15,7 @@ public class Expression {
     //Parse an Expression object from a String
     public Expression(String expression) {
         this.expression = expression.replaceAll(" ", "");
-        expArr = expression.toCharArray();
+        expArr = this.expression.toCharArray();
 
         //Find variable
         for (int index = 0; index < expArr.length; index++) {

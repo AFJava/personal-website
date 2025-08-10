@@ -10,10 +10,11 @@ public class Expression {
     private char[] expArr;
     private char variable = ' ';
     private List<String> operators, operands;
-    private boolean isValid = false;
+    private List<String> errors = new ArrayList<>();
 
+    //Parse an Expression object from a String
     public Expression(String expression) {
-        this.expression = expression;
+        this.expression = expression.replaceAll(" ", "");
         expArr = expression.toCharArray();
 
         //Find variable
@@ -26,9 +27,9 @@ public class Expression {
         operators = findOperators();
         operands = findOperands();
 
-        isValid = testValidInput();
+        errors = testValidInput();
 
-        /* */
+        /* 
         for (String operator : operators) {
             System.out.print(operator + " ");
         }
@@ -38,26 +39,27 @@ public class Expression {
             System.out.print(operand + " ");
         }
         System.out.println();
+        */
     }
 
+    //Directly enter operator/operand information
     public Expression(List<String> operators, List<String> operands) {
         this.operators = operators;
         this.operands = operands;
     }
 
+    //Copy expression
     public Expression(Expression other) {
         expression = other.expression;
         expArr = other.expArr;
         variable = other.variable;
         operators = new ArrayList<>(other.operators);
         operands = new ArrayList<>(other.operands);
-        isValid = other.isValid;
+        errors = other.errors;
     }
 
-    public Expression() {
-    }
-
-    ;
+    //TODO: Figure out why this thing is here
+    public Expression() {};
 
         /*
          * Evaluates a function from left to right.
@@ -374,28 +376,51 @@ public class Expression {
         return operands;
     }
 
-    //TODO: Implement error list (instead of giving errors one by one), finish parentheses validation stack
+    //TODO: Implement error list (instead of giving errors one by one)
     /*
         * Tests if a given function is valid based on its number of operands, operators, parenthesis, and brackets.
         * The function can NOT have any spaces.
         * 
         * @param function   the function to test the validity of
      */
-    public boolean testValidInput() {
+    public List<String> testValidInput() {
+        List<String> errors = new ArrayList<String>();
         Stack<Character> parenMatch = new Stack<>();
         HashMap<Character, Character> matches = new HashMap<>();
         matches.put('(', ')');
         matches.put('[', ']');
         matches.put('{', '}');
         char decimal = ' ';
+        
+        //If empty input
+        if (expression.equals("")) {
+            errors.add("Please enter something.");
+        }
 
+        //If number of operators and operands do not match up
+        if (operators.size() + 1 != operands.size()) {
+            for (int index = 0; index < expArr.length - 1; index++) {
+                //If the next char after an operator is not a digit or open parenthesis
+                if (isOperator(index) && (!(Character.isDigit(expArr[index + 1])) && expArr[index + 1] != '(')) {
+                    errors.add("Please check the \"" + expArr[index] + "\" operator.");
+                } //If the last char is an operator
+                else if (index == expArr.length - 1) {
+                    if (isOperator(index)) {
+                        errors.add("Please check the \"" + expArr[index] + "\" operator.");
+                    }
+                }
+                /* else {
+                        System.out.println("Something went wrong. Please try again.");
+                    } */
+            }
+        }
+        
         //Search through function - check decimal validity and count parentheses/brackets
         for (int index = 0; index < expArr.length; index++) {
             char ch = expArr[index];
             //If more than one letter is used
             if (Character.isLetter(ch) && ch != variable) {
-                System.out.println("Please use only a single variable in your input.");
-                return false;
+                errors.add("Please use only a single variable in your input.");
             }
 
             //If c is a decimal point, store '.' in decimal. 
@@ -403,51 +428,27 @@ public class Expression {
                 decimal = '.';
             } //If there is another decimal point in the same term, the function is not valid input.
             else if (decimal == ch) {
-                System.out.println("Please do not put more than one decimal point in a single number.");
-                return false;
+                errors.add("Please do not put more than one decimal point in a single number.");
             } else if (isOperator(index) || isParenthesis(index)) {
                 decimal = ' ';
             } else if (ch == '(' || ch == '[' || ch == '{') {
                 parenMatch.push(ch);
             } else if (ch == ')' || ch == ']' || ch == '}') {
                 if (parenMatch.isEmpty()) {
-                    System.out.println("Mismatched " + ch);
+                    errors.add("Mismatched " + ch);
                 }
                 char prev = parenMatch.pop();
                 if (matches.get(prev) != ch) {
-                    System.out.println("Mismatched " + prev + " with " + ch);
+                    errors.add("Mismatched " + prev + " with " + ch);
                 }
             }
         }
 
         if (!parenMatch.isEmpty()) {
-            System.out.println("You have mismatched parentheses");
+            errors.add("You have mismatched parentheses");
         }
 
-        //Check what went wrong and return an error message
-        //TODO: Check if this first if statement is really necessary or if it can be replaced by a return statement
-        if (operators.size() + 1 == operands.size()) {
-            return true;
-        } else if (expression.equals("")) {
-            System.out.println("Please enter something.");
-            return false;
-        } else {
-            for (int index = 0; index < expArr.length - 1; index++) {
-                //If the next char after an operator is not a digit or open parenthesis
-                if (isOperator(index) && (!(Character.isDigit(expArr[index + 1])) && expArr[index + 1] != '(')) {
-                    System.out.println("Please check the \"" + expArr[index] + "\" operator.");
-                } //If the last char is an operator
-                else if (index == expArr.length - 1) {
-                    if (isOperator(index)) {
-                        System.out.println("Please check the \"" + expArr[index] + "\" operator.");
-                    }
-                }
-                /* else {
-                        System.out.println("Something went wrong. Please try again.");
-                    } */
-            }
-            return false;
-        }
+        return errors;
     }
 
     public boolean isOperand(int index) {
@@ -507,5 +508,9 @@ public class Expression {
 
     public void setVariable(char variable) {
         this.variable = variable;
+    }
+
+    public List<String> getErrors() {
+        return errors;
     }
 }

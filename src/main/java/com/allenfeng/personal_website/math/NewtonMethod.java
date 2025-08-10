@@ -38,7 +38,9 @@
  */
 package com.allenfeng.personal_website.math;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class NewtonMethod {
     //Angles/Trig functions to be implemented
@@ -67,25 +69,28 @@ public class NewtonMethod {
                 function = new Expression(); 
                 derivative = function;
                 
-                while (!function.isValid) {
+                //Get function, validate
+                while (!function.getErrors().isEmpty()) {
                     System.out.print("Enter the original function: \ny = ");
 
-                    String expression = br.readLine().replaceAll(" ", "");
+                    String expression = br.readLine();
                     function = new Expression(expression);
 
                     System.out.println();
                     //System.out.println(variable);
                 }
-                 
-                while (!derivative.isValid) {
+                
+                //Get derivative, validate
+                while (!derivative.getErrors().isEmpty()) {
                     System.out.print("Enter the function's derivative: \ny' = ");
 
-                    String dExpression = br.readLine().replaceAll("\\s", "");
+                    String dExpression = br.readLine();
                     derivative = new Expression(dExpression);
 
                     System.out.println();
                 }
                 
+                //Get starting value, validate
                 validInput = false;
                 while (!validInput) {
                     try {
@@ -101,6 +106,7 @@ public class NewtonMethod {
                     System.out.println();
                 }
 
+                //Get iterations, validate
                 validInput = false;
                 while (!validInput) {
                     try {

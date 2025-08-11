@@ -19,19 +19,21 @@
         
         <main>
             <form th:action = "@{/calculator}" method = "post">
-                Function: <input type = "text" name = "function">
+                Function: <input type = "text" name = "function" required>
                 <ul th:if = "${functionErr}">
                     <li th:each = "e : ${functionErr}" th:text = "${e}"></li>
                 </ul>
-                Derivative: <input type = "text" name = "derivative">
+                Derivative: <input type = "text" name = "derivative" required>
                 <ul th:if = "${derErr}">
                     <li th:each = "e : ${derErr}" th:text = "${e}"></li>
                 </ul>
-                Starting point: <input type = "number" name = "value">
-                Iterations <input type = "number" name = "iterations">
+                Starting point: <input type = "number" name = "value" required>
+                Iterations <input type = "number" name = "iterations" required>
                 <button type = "submit">Run</button>
             </form>
 
+            <p th:if = "${maxIterMsg}" th:text = "${maxIterMsg}"></p>
+            
             <ul th:if = "${nOutput}">
                 <li th:each = "e : ${nOutput}" th:text = "${e}">
             </ul>

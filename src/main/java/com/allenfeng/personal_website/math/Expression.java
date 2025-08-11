@@ -399,8 +399,8 @@ public class Expression {
             errs.add("Please check the \"" + operators.get(0) + "\" operator.");
         }
 
-        //If number of operators and operands do not match up
-        if (operators.size() + 1 != operands.size()) {
+        //If not empty and number of operators and operands do not match up
+        if (! expression.equals("") && operators.size() + 1 != operands.size()) {
             for (int index = 0; index < expArr.length - 1; index++) {
                 //If the next char after an operator is not a digit, open parenthesis, or negative sign
                 if (isOperator(index) && !(Character.isDigit(expArr[index + 1]) || isOpenParenthesis(index + 1) || isNegativeSign(index + 1))) {

@@ -16,6 +16,9 @@ import com.allenfeng.personal_website.math.NewtonMethod;
 @Controller
 @RequestMapping("/")
 public class CalculatorController {
+    //Maximum iterations allowed
+    public final int maxIter = 1000;
+    
     @GetMapping("/calculator")
     public String calculatorPage() {
         return "calculator";
@@ -40,7 +43,10 @@ public class CalculatorController {
             model.addAttribute("derErr", der.getErrors());
         }
 
-        //Value and iterations validated on frontend?
+        if(iterations > 1000) {
+            model.addAttribute("maxIterMsg", "Iterations capped at " + maxIter + " for performance.");
+            iterations = 1000;
+        }
 
         List<String> output = new ArrayList<>();
         if(valid) {

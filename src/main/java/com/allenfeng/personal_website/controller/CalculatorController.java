@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.allenfeng.personal_website.math.Expression;
 import com.allenfeng.personal_website.math.NewtonMethod;
 
-
-
 @Controller
 @RequestMapping("/")
 public class CalculatorController {

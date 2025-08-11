@@ -1,9 +1,9 @@
 package com.allenfeng.personal_website.math;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 
 public class Expression {
     private String expression;
@@ -313,16 +313,15 @@ public class Expression {
             } //Keep parentheses in operator list to maintain correct order
             else if (isParenthesis(index)) {
                 //Place extra multiplication operator when two parenthetical statements are adjacent
-                if (index != 0 && ((expArr[index] == '(' && expArr[index - 1] == ')') || (expArr[index] == '[' && expArr[index - 1] == ']'))) {
+                if (index != 0 && isOpenParenthesis(index) && isCloseParenthesis(index - 1)) {
                     operators.add("*");
                 }
 
                 operators.add(Character.toString(expArr[index]));
             } //Place an extra multiplication operator when a number is written adjacent to a variable/parenthetical
-            else if (index != (expArr.length - 1) && Character.isDigit(expArr[index]) && (expArr[index + 1] == variable || expArr[index + 1] == '(' || expArr[index + 1] == '[')) {
+            else if (index != (expArr.length - 1) && Character.isDigit(expArr[index]) && (expArr[index + 1] == variable || isOpenParenthesis(index + 1))) {
                 operators.add("*");
-            } else if (index != 0 && ((Character.isDigit(expArr[index]) && (expArr[index - 1] == ')' || expArr[index - 1] == ']'))
-                    || (expArr[index] == variable && (expArr[index - 1] == ')' || expArr[index - 1] == ']')))) {
+            } else if (index != 0 && (Character.isDigit(expArr[index]) || expArr[index] == variable) && isCloseParenthesis(index - 1)) {
                 operators.add("*");
             } //Rewrite negative signs as -1 * operand
             else if (isNegativeSign(index)) {
@@ -384,7 +383,7 @@ public class Expression {
         * @param function   the function to test the validity of
      */
     public List<String> testValidInput() {
-        List<String> errors = new ArrayList<String>();
+        List<String> errs = new ArrayList<>();
         Stack<Character> parenMatch = new Stack<>();
         HashMap<Character, Character> matches = new HashMap<>();
         matches.put('(', ')');
@@ -394,24 +393,24 @@ public class Expression {
         
         //If empty input
         if (expression.equals("")) {
-            errors.add("Please enter something.");
+            errs.add("Please enter something.");
         }
 
         //If number of operators and operands do not match up
         if (operators.size() + 1 != operands.size()) {
             for (int index = 0; index < expArr.length - 1; index++) {
                 //If the next char after an operator is not a digit or open parenthesis
-                if (isOperator(index) && (!(Character.isDigit(expArr[index + 1])) && expArr[index + 1] != '(')) {
-                    errors.add("Please check the \"" + expArr[index] + "\" operator.");
+                if (isOperator(index) && (!(Character.isDigit(expArr[index + 1])) && isOpenParenthesis(index + 1))) {
+                    errs.add("Please check the \"" + expArr[index] + "\" operator.");
                 } //If the last char is an operator
                 else if (index == expArr.length - 1) {
                     if (isOperator(index)) {
-                        errors.add("Please check the \"" + expArr[index] + "\" operator.");
+                        errs.add("Please check the \"" + expArr[index] + "\" operator.");
                     }
                 }
                 /* else {
-                        System.out.println("Something went wrong. Please try again.");
-                    } */
+                    System.out.println("Something went wrong. Please try again.");
+                } */
             }
         }
         
@@ -420,7 +419,7 @@ public class Expression {
             char ch = expArr[index];
             //If more than one letter is used
             if (Character.isLetter(ch) && ch != variable) {
-                errors.add("Please use only a single variable in your input.");
+                errs.add("Please use only a single variable in your input.");
             }
 
             //If c is a decimal point, store '.' in decimal. 
@@ -428,27 +427,27 @@ public class Expression {
                 decimal = '.';
             } //If there is another decimal point in the same term, the function is not valid input.
             else if (decimal == ch) {
-                errors.add("Please do not put more than one decimal point in a single number.");
+                errs.add("Please do not put more than one decimal point in a single number.");
             } else if (isOperator(index) || isParenthesis(index)) {
                 decimal = ' ';
-            } else if (ch == '(' || ch == '[' || ch == '{') {
+            } else if (isOpenParenthesis(index)) {
                 parenMatch.push(ch);
-            } else if (ch == ')' || ch == ']' || ch == '}') {
+            } else if (isCloseParenthesis(index)) {
                 if (parenMatch.isEmpty()) {
-                    errors.add("Mismatched " + ch);
+                    errs.add("Mismatched " + ch);
                 }
                 char prev = parenMatch.pop();
                 if (matches.get(prev) != ch) {
-                    errors.add("Mismatched " + prev + " with " + ch);
+                    errs.add("Mismatched " + prev + " with " + ch);
                 }
             }
         }
 
         if (!parenMatch.isEmpty()) {
-            errors.add("You have mismatched parentheses");
+            errs.add("You have mismatched parentheses");
         }
 
-        return errors;
+        return errs;
     }
 
     public boolean isOperand(int index) {
@@ -457,8 +456,16 @@ public class Expression {
         return Character.isDigit(expArr[index]) || expArr[index] == variable || expArr[index] == '.';
     }
 
+    public boolean isOpenParenthesis(int index) {
+        return expArr[index] == '(' || expArr[index] == '[' || expArr[index] == '{';
+    }
+
+    public boolean isCloseParenthesis(int index) {
+        return expArr[index] == ')' || expArr[index] == ']' || expArr[index] == '}';
+    }
+
     public boolean isParenthesis(int index) {
-        return expArr[index] == '(' || expArr[index] == ')' || expArr[index] == '[' || expArr[index] == ']';
+        return isOpenParenthesis(index) || isCloseParenthesis(index);
     }
 
     public boolean isOperator(int index) {
@@ -482,8 +489,7 @@ public class Expression {
         }
 
         //If the '-' is preceded by an operator/open parenthesis and followed by an operand, open parenthesis, or negative sign, it is a negative sign
-        if (index != 0 && (isOperator(index - 1) || expArr[index - 1] == '(')
-                && index != expArr.length - 1 && (isOperand(index + 1) || expArr[index + 1] == '(' || isNegativeSign(index + 1))) {
+        if ((isOperator(index - 1) || isOpenParenthesis(index - 1)) && (index != expArr.length - 1 && isOperand(index + 1) || isOpenParenthesis(index + 1) || isNegativeSign(index + 1))) {
             return true;
         }
 

@@ -52,8 +52,6 @@ public class NewtonMethod {
     private static Expression function, derivative;
 
     public static void main(String[] args) {
-        NewtonMethod driver = new NewtonMethod();
-        
         boolean done = false;
         boolean validInput;
         
@@ -70,22 +68,28 @@ public class NewtonMethod {
                 derivative = function;
                 
                 //Get function, validate
-                while (!function.getErrors().isEmpty()) {
+                validInput = false;
+                while (! validInput) {
                     System.out.print("Enter the original function: \ny = ");
 
                     String expression = br.readLine();
                     function = new Expression(expression);
 
+                    validInput = function.getErrors().isEmpty();
+
                     System.out.println();
                     //System.out.println(variable);
                 }
                 
+                validInput = false;
                 //Get derivative, validate
-                while (!derivative.getErrors().isEmpty()) {
+                while (! validInput) {
                     System.out.print("Enter the function's derivative: \ny' = ");
 
                     String dExpression = br.readLine();
                     derivative = new Expression(dExpression);
+
+                    validInput = derivative.getErrors().isEmpty();
 
                     System.out.println();
                 }

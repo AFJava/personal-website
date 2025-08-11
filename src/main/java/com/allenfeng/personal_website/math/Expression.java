@@ -394,23 +394,25 @@ public class Expression {
         //If empty input
         if (expression.equals("")) {
             errs.add("Please enter something.");
+        } //If input consists of single operator
+        if (operators.size() == 1 && operands.isEmpty()) {
+            errs.add("Please check the \"" + operators.get(0) + "\" operator.");
         }
 
         //If number of operators and operands do not match up
         if (operators.size() + 1 != operands.size()) {
             for (int index = 0; index < expArr.length - 1; index++) {
-                //If the next char after an operator is not a digit or open parenthesis
-                if (isOperator(index) && (!(Character.isDigit(expArr[index + 1])) && isOpenParenthesis(index + 1))) {
+                //If the next char after an operator is not a digit, open parenthesis, or negative sign
+                if (isOperator(index) && !(Character.isDigit(expArr[index + 1]) || isOpenParenthesis(index + 1) || isNegativeSign(index + 1))) {
                     errs.add("Please check the \"" + expArr[index] + "\" operator.");
-                } //If the last char is an operator
-                else if (index == expArr.length - 1) {
-                    if (isOperator(index)) {
-                        errs.add("Please check the \"" + expArr[index] + "\" operator.");
-                    }
                 }
                 /* else {
                     System.out.println("Something went wrong. Please try again.");
                 } */
+            }
+            //If the last char is an operator
+            if (isOperator(expArr.length - 1)) {
+                errs.add("Please check the \"" + expArr[expArr.length - 1] + "\" operator.");
             }
         }
         

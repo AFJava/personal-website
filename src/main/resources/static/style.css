@@ -78,3 +78,23 @@ img {
     text-decoration: none;
     font-size: 32px;
 }
+
+.page {
+    display: grid;
+    grid-template-rows: auto 1fr; /* header height + fill the rest */
+}
+
+.split-grid {
+    padding: 0; /* Override main padding */
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.left {
+    padding: 2rem;
+    background-color: slategray;
+}
+
+.right {
+    background-color: aliceblue;
+}

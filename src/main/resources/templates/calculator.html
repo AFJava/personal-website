@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Allen's Webpage</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" th:href="@{/style.css(v=${#dates.createNow().time})}">
     </head>
 
     <body>
@@ -17,26 +17,30 @@
             </div>
         </header>
         
-        <main>
-            <form th:action = "@{/calculator}" method = "post">
-                Function: <input type = "text" name = "function" required>
-                <ul th:if = "${functionErr}">
-                    <li th:each = "e : ${functionErr}" th:text = "${e}"></li>
-                </ul>
-                Derivative: <input type = "text" name = "derivative" required>
-                <ul th:if = "${derErr}">
-                    <li th:each = "e : ${derErr}" th:text = "${e}"></li>
-                </ul>
-                Starting point: <input type = "number" name = "value" required>
-                Iterations <input type = "number" name = "iterations" required>
-                <button type = "submit">Run</button>
-            </form>
+        <main class = "split-grid">
+            <div class = "left">
+                <form th:action = "@{/calculator}" method = "post">
+                    Function: y = <input type = "text" name = "function" required>
+                    <ul th:if = "${functionErr}">
+                        <li th:each = "e : ${functionErr}" th:text = "${e}"></li>
+                    </ul>
+                    Derivative: y' = <input type = "text" name = "derivative" required>
+                    <ul th:if = "${derErr}">
+                        <li th:each = "e : ${derErr}" th:text = "${e}"></li>
+                    </ul>
+                    Starting point: <input type = "number" name = "value" required>
+                    Iterations <input type = "number" name = "iterations" required>
+                    <button type = "submit">Run</button>
+                </form>
+                
+                <p th:if = "${maxIterMsg}" th:text = "${maxIterMsg}"></p>
+            </div>
 
-            <p th:if = "${maxIterMsg}" th:text = "${maxIterMsg}"></p>
-            
-            <ul th:if = "${nOutput}">
-                <li th:each = "e : ${nOutput}" th:text = "${e}">
-            </ul>
+            <div class = "right">
+                <ul th:if = "${nOutput}">
+                    <li th:each = "e : ${nOutput}" th:text = "${e}"></li>
+                </ul>
+            </div>
         </main>
 
         

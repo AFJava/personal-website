@@ -18,18 +18,22 @@
         </header>
         
         <main class = "split-grid">
+            <div class = "top">
+                <p>This is a short description of the Newton's Method calculator.</p>
+            </div>
+            
             <div class = "left">
                 <form th:action = "@{/calculator}" method = "post">
-                    Function: y = <input type = "text" name = "function" required>
+                    Function: y = <input type = "text" name = "function" required> <br>
                     <ul th:if = "${functionErr}">
                         <li th:each = "e : ${functionErr}" th:text = "${e}"></li>
                     </ul>
-                    Derivative: y' = <input type = "text" name = "derivative" required>
+                    Derivative: y' = <input type = "text" name = "derivative" required> <br>
                     <ul th:if = "${derErr}">
                         <li th:each = "e : ${derErr}" th:text = "${e}"></li>
                     </ul>
-                    Starting point: <input type = "number" name = "value" required>
-                    Iterations <input type = "number" name = "iterations" required>
+                    Starting point: <input type = "number" name = "value" required> <br>
+                    Iterations: <input type = "number" name = "iterations" required> <br>
                     <button type = "submit">Run</button>
                 </form>
                 

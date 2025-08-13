@@ -52,13 +52,16 @@ h3 {
     font-size: 32px;
 }
 
-p {
-    padding-left: 2rem;
-    padding-right: 2rem;
+p, form, input, button, li {
     color: black;
     line-height: 165%;
     font-size: 24px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+p {
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 img {
@@ -79,15 +82,18 @@ img {
     font-size: 32px;
 }
 
-.page {
-    display: grid;
-    grid-template-rows: auto 1fr; /* header height + fill the rest */
-}
-
 .split-grid {
     padding: 0; /* Override main padding */
     display: grid;
+    grid-template-rows: auto 1fr;
     grid-template-columns: 30% 70%;
+}
+
+/*TODO select colors*/
+.top {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: antiquewhite;
 }
 
 .left {
@@ -96,5 +102,15 @@ img {
 }
 
 .right {
+    padding: 2rem;
     background-color: aliceblue;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+button:hover {
+    filter: brightness(0.9);
 }

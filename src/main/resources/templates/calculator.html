@@ -19,7 +19,40 @@
         
         <main class = "split-grid">
             <div class = "top">
-                <p>This is a short description of the Newton's Method calculator.</p>
+                <p>
+                    Newton's method is an iterative process that allows one to find the roots of a function. Supposing our function is some f(x), we start with an initial x value.
+                    Then we find the tangent line of the function:
+                    [Insert latex for this equation]
+                </p>
+                <table border = "1">
+                    <tr>
+                        <th rowspan = "2" colspan = "2"></th>
+                        <th colspan="2">Function</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2"></th>
+                        <td>+</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">Derivative</th>
+                        <td>+</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <p>And the root of that tangent line.</p> <br>
+                <p>
+                    This calculator takes user-defined functions and stores them in an Expression class, where the inputs are validated and processed.
+                    Once the expression has been split into operators and operands, it evaluates the function and its derivative at the user's starting value,
+                    starting by substituting the starting value into the variable of the expression (if it exists), then recursively evaluating parenthetical expressions,
+                    starting with the innermost. The function and derivatives' values at the point are then used to execute an iteration of Newton's Method.
+                </p>
             </div>
             
             <div class = "left">

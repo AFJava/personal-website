@@ -52,7 +52,7 @@ h3 {
     font-size: 32px;
 }
 
-p, form, input, button, li {
+p, form, input, button, li, table {
     color: black;
     line-height: 165%;
     font-size: 24px;
@@ -70,6 +70,11 @@ img {
     border-color: coral;
     border-style: solid;
     margin-left: 1rem;
+}
+
+#calculatorImg {
+    height: 5rem;
+    width: 8rem;
 }
 
 .topnav a {
@@ -96,13 +101,16 @@ img {
     background-color: antiquewhite;
 }
 
-.left {
+.left, .right {
     padding: 2rem;
+    overflow-y: auto;
+}
+
+.left {
     background-color: slategray;
 }
 
 .right {
-    padding: 2rem;
     background-color: aliceblue;
 }
 

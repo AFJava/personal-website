@@ -295,13 +295,13 @@ public class Expression {
     }
 
     /*
-         * Returns an ArrayList<String> containing all of the operators in a function.
-         * The function can NOT have any spaces. Remove all spaces before passing to this function.
-         * 10-3-22 Negative numbers implemented
-         * 12-31-24 Implemented helper methods to better check for negative signs
-         *
-         * @param function   the function to find the operators of
-         * @return ArrayList of operators
+     * Returns an ArrayList<String> containing all of the operators in a function.
+     * The function can NOT have any spaces. Remove all spaces before passing to this function.
+     * 10-3-22 Negative numbers implemented
+     * 12-31-24 Implemented helper methods to better check for negative signs
+     *
+     * @param function   the function to find the operators of
+     * @return ArrayList of operators
      */
     public ArrayList<String> findOperators() {
         ArrayList<String> operators = new ArrayList<>();

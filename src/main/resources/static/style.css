@@ -52,6 +52,7 @@ h3 {
     font-size: 32px;
 }
 
+/*All non-header text gets this styling*/
 p, form, input, button, li, table {
     color: black;
     line-height: 165%;
@@ -72,6 +73,15 @@ img {
     margin-left: 1rem;
 }
 
+table {
+    margin: 0 auto;
+    max-width: 70%;
+}
+/*
+th, td {
+    height: auto;
+}
+*/
 #calculatorImg {
     height: 5rem;
     width: 8rem;
@@ -87,6 +97,15 @@ img {
     font-size: 32px;
 }
 
+.sideways {
+    writing-mode: vertical-rl;
+}
+
+.centered {
+    text-align: center;
+}
+
+/*calculator grid layout - may change if other split screens needed on other pages*/
 .split-grid {
     padding: 0; /* Override main padding */
     display: grid;
@@ -94,7 +113,6 @@ img {
     grid-template-columns: 30% 70%;
 }
 
-/*TODO select colors*/
 .top {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -114,6 +132,7 @@ img {
     background-color: aliceblue;
 }
 
+/*Submit button styling*/
 button {
     padding: 0.5rem 1rem;
     border-radius: 4px;

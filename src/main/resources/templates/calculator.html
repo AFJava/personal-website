@@ -37,14 +37,26 @@
                     </tr>
                     <tr>
                         <th rowspan="2" class="sideways">Derivative</th>
-                        <td>+</td>
-                        <td>The function value is positive, and the slope of the tangent line is positive, so to find the zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.</td>
-                        <td>The function value is negative, and the slopt of the tangent line is positive. Therefore, we must increase x to find the x-intercept of the tangent line, bringing us closer to a root of the function.</td>
+                        <td class="centered side-header">+</td>
+                        <td>
+                            The function value is positive, and the slope of the tangent line is positive, so to find the zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.
+                            <img src = "assets/Example++.png" class="calculatorExImg">
+                        </td>
+                        <td>
+                            The function value is negative, and the slope of the tangent line is positive. Therefore, we must increase x to find the x-intercept of the tangent line, bringing us closer to a root of the function.
+                            <img src = "assets/Example-+.png" class="calculatorExImg">
+                        </td>
                     </tr>
                     <tr>
-                        <td>-</td>
-                        <td>The function value is positive, and the slope of the tangent line is negative. so to find the zero of the tangent line, we must increase x, bringing us closer to the zero of the function.</td>
-                        <td>The function value is negative, and the slope of the tangent line is negative, so to find the zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.</td>
+                        <td class="centered side-header">-</td>
+                        <td>
+                            The function value is positive, and the slope of the tangent line is negative. so to find the zero of the tangent line, we must increase x, bringing us closer to the zero of the function.
+                            <img src = "assets/Example+-.png" class="calculatorExImg">
+                        </td>
+                        <td>
+                            The function value is negative, and the slope of the tangent line is negative, so to find the zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.
+                            <img src = "assets/Example--.png" class="calculatorExImg">
+                        </td>
                     </tr>
                 </table>
 
@@ -76,6 +88,7 @@
             </div>
 
             <div class = "right">
+                <p th:if = ${#lists.isEmpty(nOutput)}>Your output will appear here when you run the program.</p>
                 <ul th:if = "${nOutput}">
                     <li th:each = "e : ${nOutput}" th:text = "${e}"></li>
                 </ul>

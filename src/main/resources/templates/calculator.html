@@ -20,9 +20,8 @@
         <main class = "split-grid">
             <div class = "top">
                 <p>
-                    Newton's method is an iterative process that allows one to find the roots of a function. Supposing our function is some f(x), we start with an initial x value.
-                    Then we find the tangent line of the function:
-                    [Insert latex for this equation]
+                    Newton's method is an iterative process that allows one to find the roots of a function. Supposing our function is some f(x), we start with an initial x value x_0.
+                    Then we find the tangent line of the function at that point, which can be written as f_0(x) = f(x_0) + f'(x_0)(x - x_0). From here, there are four possibilities, outlined in the tbale below.
                 </p>
 
                 <!--Maybe add some images to help visualize-->
@@ -43,7 +42,7 @@
                             <img src = "assets/Example++.png" class="calculatorExImg">
                         </td>
                         <td>
-                            The function value is negative, and the slope of the tangent line is positive. Therefore, we must increase x to find the x-intercept of the tangent line, bringing us closer to a root of the function.
+                            The function value is negative, and the slope of the tangent line is positive, so to find the zero of the tangent line, we must increase x, bringing us closer to the zero of the function.
                             <img src = "assets/Example-+.png" class="calculatorExImg">
                         </td>
                     </tr>
@@ -60,7 +59,11 @@
                     </tr>
                 </table>
 
-                <p>And the root of that tangent line.</p> <br>
+                <p>
+                    We can see that in each case, the root of the line tangent to the function at x_0 is closer to the root of the function than x_0 itself.
+                    We can call the root of this tangent line x_1 and repeat this process, observing once again that the root of the tangent line at x_1 is closer to the root of the function.
+                    In other words, we can approach a root of the function by repeatedly finding the x-intercepts of its tangent lines.    
+                </p> <br>
                 <p>
                     This calculator takes user-defined functions and stores them in an Expression class, where the inputs are validated and processed.
                     Once the expression has been split into operators and operands, it evaluates the function and its derivative at the user's starting value,

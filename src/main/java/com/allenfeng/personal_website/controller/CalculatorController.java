@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.allenfeng.personal_website.math.Expression;
-import com.allenfeng.personal_website.math.NewtonMethod;
+import com.allenfeng.personal_website.math.IterMethods;
 
 @Controller
 @RequestMapping("/")
@@ -38,6 +38,7 @@ public class CalculatorController {
             valid = false;
             model.addAttribute("functionErr", func.getErrors());
         }
+
         if(! der.getErrors().isEmpty()) {
             valid = false;
             model.addAttribute("derErr", der.getErrors());
@@ -51,7 +52,7 @@ public class CalculatorController {
         List<String> output = new ArrayList<>();
         if(valid) {
             for (int i = 0; i < iterations; i++) {
-                value = NewtonMethod.nMethod(func, der, value);
+                value = IterMethods.nMethod(func, der, value);
                 output.add("Iteration " + (i + 1) + ": " + value);
             }
         }

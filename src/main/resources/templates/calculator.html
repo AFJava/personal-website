@@ -20,8 +20,8 @@
         <main class = "split-grid">
             <div class = "top">
                 <p>
-                    Newton's method is an iterative process that allows one to find the roots of a function. Supposing our function is some f(x), we start with an initial x value x_0.
-                    Then we find the tangent line of the function at that point, which can be written as f_0(x) = f(x_0) + f'(x_0)(x - x_0). From here, there are four possibilities, outlined in the tbale below.
+                    Newton's method is an iterative process that allows one to find the roots of a function. Supposing our function is some f(x), we start with an initial x value x<sub>0</sub>.
+                    Then we find the tangent line of the function at that point, which can be written as f<sub>0</sub>(x) = f(x<sub>0</sub>) + f'(x<sub>0</sub>)(x - x<sub>0</sub>). From here, there are four possibilities, outlined in the tbale below.
                 </p>
 
                 <!--Maybe add some images to help visualize-->
@@ -60,8 +60,8 @@
                 </table>
 
                 <p>
-                    We can see that in each case, the root of the line tangent to the function at x_0 is closer to the root of the function than x_0 itself.
-                    We can call the root of this tangent line x_1 and repeat this process, observing once again that the root of the tangent line at x_1 is closer to the root of the function.
+                    We can see that in each case, the root of the line tangent to the function at x<sub>0</sub> is closer to the root of the function than x<sub>0</sub> itself.
+                    We can call the root of this tangent line x<sub>1</sub> and repeat this process, observing once again that the root of the tangent line at x<sub>1</sub> is closer to the root of the function.
                     In other words, we can approach a root of the function by repeatedly finding the x-intercepts of its tangent lines.    
                 </p> <br>
                 <p>
@@ -73,6 +73,7 @@
             </div>
             
             <div class = "left">
+                <p>Example input: Function: y = 3x^2, Derivative: y' = 6x </p>
                 <form th:action = "@{/calculator}" method = "post">
                     Function: y = <input type = "text" name = "function" required> <br>
                     <ul th:if = "${functionErr}">

@@ -42,7 +42,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class NewtonMethod {
+public class IterMethods {
     //Angles/Trig functions to be implemented
     //Maybe make function + derivative global variables?
     

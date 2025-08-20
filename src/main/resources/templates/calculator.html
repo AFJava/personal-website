@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Allen's Webpage</title>
         <link rel="stylesheet" th:href="@{/style.css(v=${#dates.createNow().time})}">
+        <script th:src = "@{/sync.js}"></script>
     </head>
 
     <body>
@@ -73,16 +74,33 @@
             </div>
             
             <div class = "left">
-                <p>Example input: Function: y = 3x^2, Derivative: y' = 6x </p>
                 <form th:action = "@{/calculator}" method = "post">
-                    Function: y = <input type = "text" name = "function" required> <br>
+                    Function: <input type = "text" name = "funcName" maxlength = "1" value = "f" class = "charInput" id = "fn1" required>(<input type = "text" name = "varName" maxlength = "1" value = "x" class = "charInput" id = "var1" required>) = <input type = "text" name = "function" placeholder = "e.g. 5x^2 - 2x - 3" required> <br>
                     <ul th:if = "${functionErr}">
                         <li th:each = "e : ${functionErr}" th:text = "${e}"></li>
                     </ul>
-                    Derivative: y' = <input type = "text" name = "derivative" required> <br>
+                    Derivative: <input type = "text" name = "funcName2" maxlength = "1" value = "f" class = "charInput" id = "fn2" required>'(<input type = "text" name = "varName2" maxlength = "1" value = "x" class = "charInput" id = "var2" required>) = <input type = "text" name = "derivative" placeholder = "e.g. 10x - 2" required> <br>
                     <ul th:if = "${derErr}">
                         <li th:each = "e : ${derErr}" th:text = "${e}"></li>
                     </ul>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const fn1 = document.getElementById("fn1");
+                            const fn2 = document.getElementById("fn2");
+                            const v1 = document.getElementById("var1");
+                            const v2 = document.getElementById("var2");
+
+                            function link(a, b) {
+                                a.addEventListener("input", () => { b.value = a.value; });
+                                b.addEventListener("input", () => { a.value = b.value; });
+                            }
+
+                            link(fn1, fn2);
+                            link(v1, v2);
+                        })
+                    </script>
+                    
                     Starting point: <input type = "number" name = "value" required> <br>
                     Iterations: <input type = "number" name = "iterations" required> <br>
                     <button type = "submit">Run</button>

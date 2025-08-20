@@ -169,4 +169,9 @@ public class IterMethods {
 
         return nextInput;
     }
+
+    //Takes up to two inputs for the differential equation
+    public static double eMethod(Expression function, Expression derivative, double[] input, double step) {
+        return 0.0;
+    }
 }

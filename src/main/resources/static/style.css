@@ -142,6 +142,11 @@ img {
     background-color: aliceblue;
 }
 
+.charInput {
+    text-align: center;
+    width: 0.75rem;
+}
+
 /*Submit button styling*/
 button {
     padding: 0.5rem 1rem;

@@ -25,7 +25,9 @@ public class CalculatorController {
     }
 
     @PostMapping("/calculator")
-    public String runCalculator(@RequestParam String function,
+    public String runCalculator(@RequestParam char funcName,
+                                @RequestParam char varName,
+                                @RequestParam String function,
                                 @RequestParam String derivative,
                                 @RequestParam double value,
                                 @RequestParam int iterations,

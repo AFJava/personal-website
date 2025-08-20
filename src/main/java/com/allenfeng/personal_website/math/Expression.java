@@ -2,6 +2,7 @@ package com.allenfeng.personal_website.math;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 
@@ -9,6 +10,7 @@ public class Expression {
     private String expression;
     private char[] expArr;
     private char variable = ' ';
+    private HashSet<Character> constants = new HashSet<>();
     private List<String> operators, operands;
     private List<String> errors = new ArrayList<>();
 
@@ -356,7 +358,7 @@ public class Expression {
             }
 
             if (isOperand(index) && !(expArr[index] == variable)) {
-                //add first number to token
+                //add first digit to token
                 token.append(expArr[index]);
 
                 while (hasMoreDigs(index)) {

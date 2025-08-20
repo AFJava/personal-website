@@ -33,8 +33,11 @@ public class CalculatorController {
                                 @RequestParam int iterations,
                                 Model model) {
         boolean valid = true;
-        Expression func = new Expression(function);
-        Expression der = new Expression(derivative);
+        List<Character> vars = new ArrayList<>();
+        vars.add(varName);
+        
+        Expression func = new Expression(function, vars);
+        Expression der = new Expression(derivative, vars);
         
         if(! func.getErrors().isEmpty()) {
             valid = false;

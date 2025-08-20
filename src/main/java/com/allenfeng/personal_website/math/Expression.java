@@ -6,26 +6,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 
+//TODO 8/20/25: Take input for variable name from HTML form, implement support for multiple variables and constants, start implementing Terms
+//TODO 8/21-22/25: Implement Terms (and combining like terms in an expression?)
+
+
 public class Expression {
     private String expression;
     private char[] expArr;
-    private char variable = ' ';
+    private char[] variables;
     private HashSet<Character> constants = new HashSet<>();
     private List<String> operators, operands;
     private List<String> errors = new ArrayList<>();
 
     //Parse an Expression object from a String
-    public Expression(String expression) {
+    public Expression(String expression, char[] variables) {
+        this.variables = variables;
         this.expression = expression.replaceAll(" ", "");
         expArr = this.expression.toCharArray();
-
-        //Find variable
-        for (int index = 0; index < expArr.length; index++) {
-            if (Character.isLetter(expArr[index])) {
-                variable = expArr[index];
-            }
-        }
-
+        
         operators = findOperators();
         operands = findOperands();
 
@@ -54,7 +52,7 @@ public class Expression {
     public Expression(Expression other) {
         expression = other.expression;
         expArr = other.expArr;
-        variable = other.variable;
+        variables = other.variables;
         operators = new ArrayList<>(other.operators);
         operands = new ArrayList<>(other.operands);
         errors = other.errors;
@@ -357,7 +355,7 @@ public class Expression {
                 index++;
             }
 
-            if (isOperand(index) && !(expArr[index] == variable)) {
+            if (isOperand(index) && !isVariable(index)) {
                 //add first digit to token
                 token.append(expArr[index]);
 
@@ -367,7 +365,7 @@ public class Expression {
                 }
 
                 operands.add(token.toString());
-            } else if (expArr[index] == variable) {
+            } else if (isVariable(index)) {
                 operands.add(Character.toString(expArr[index]));
             } else if (isParenthesis(index)) {
                 operands.add(Character.toString(expArr[index]));
@@ -422,7 +420,7 @@ public class Expression {
         for (int index = 0; index < expArr.length; index++) {
             char ch = expArr[index];
             //If more than one letter is used
-            if (Character.isLetter(ch) && ch != variable) {
+            if (Character.isLetter(ch) && ! isVariable(index)) {
                 errs.add("Please use only a single variable in your input.");
             }
 
@@ -455,9 +453,28 @@ public class Expression {
     }
 
     public boolean isOperand(int index) {
-        //Is an operand if it is a number or the variable
+        //Is an operand if it is a number or a variable
         //Note that this checks a SINGLE char
-        return Character.isDigit(expArr[index]) || expArr[index] == variable || expArr[index] == '.';
+        return Character.isDigit(expArr[index]) || isVariable(index) || expArr[index] == '.';
+    }
+
+    public boolean isVariable(int index) {
+        for(int i = 0; i < variables.length; i++) {
+            if(expArr[index] == variables[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public boolean isOperator(int index) {
+        if (expArr[index] == '+' || expArr[index] == '-' || expArr[index] == '*' || expArr[index] == '/' || expArr[index] == '^') {
+            if (!isNegativeSign(index)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isOpenParenthesis(int index) {
@@ -470,15 +487,6 @@ public class Expression {
 
     public boolean isParenthesis(int index) {
         return isOpenParenthesis(index) || isCloseParenthesis(index);
-    }
-
-    public boolean isOperator(int index) {
-        if (expArr[index] == '+' || expArr[index] == '-' || expArr[index] == '*' || expArr[index] == '/' || expArr[index] == '^') {
-            if (!isNegativeSign(index)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public boolean isNegativeSign(int index) {
@@ -505,22 +513,10 @@ public class Expression {
         if (index >= expArr.length - 1) {
             return false; 
         }//If this digit is followed by an operator, than all digits for the number have been read
-        else if (index < expArr.length - 1 && (isOperator(index + 1) || isParenthesis(index + 1) || expArr[index + 1] == variable)) {
+        else if (index < expArr.length - 1 && (isOperator(index + 1) || isParenthesis(index + 1) || isVariable(index + 1))) {
             return false;
         }
 
         return true;
-    }
-
-    public char getVariable() {
-        return variable;
-    }
-
-    public void setVariable(char variable) {
-        this.variable = variable;
-    }
-
-    public List<String> getErrors() {
-        return errors;
     }
 }

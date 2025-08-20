@@ -13,13 +13,13 @@ import java.util.Stack;
 public class Expression {
     private String expression;
     private char[] expArr;
-    private char[] variables;
+    private List<Character> variables;
     private HashSet<Character> constants = new HashSet<>();
     private List<String> operators, operands;
     private List<String> errors = new ArrayList<>();
 
     //Parse an Expression object from a String
-    public Expression(String expression, char[] variables) {
+    public Expression(String expression, List<Character> variables) {
         this.variables = variables;
         this.expression = expression.replaceAll(" ", "");
         expArr = this.expression.toCharArray();
@@ -159,7 +159,8 @@ public class Expression {
 
         //Replace all variables with the input value specified
         for (int index = 0; index < operands.size(); index++) {
-            if (operands.get(index).contains(String.valueOf(variable))) {
+            //Current operand is a variable iff its length is one and 
+            if (operands.get(index).length() == 1 && variables.contains(Character.valueOf(operands.get(index).charAt(0))) ) {
                 StringBuilder token = new StringBuilder("");
 
                 if (operands.get(index).contains("-")) {
@@ -319,14 +320,14 @@ public class Expression {
 
                 operators.add(Character.toString(expArr[index]));
             } //Place an extra multiplication operator when a number is written adjacent to a variable/parenthetical
-            else if (index != (expArr.length - 1) && Character.isDigit(expArr[index]) && (expArr[index + 1] == variable || isOpenParenthesis(index + 1))) {
+            else if (index != (expArr.length - 1) && Character.isDigit(expArr[index]) && (isVariable(index + 1) || isOpenParenthesis(index + 1))) {
                 operators.add("*");
-            } else if (index != 0 && (Character.isDigit(expArr[index]) || expArr[index] == variable) && isCloseParenthesis(index - 1)) {
+            } else if (index != 0 && (Character.isDigit(expArr[index]) || isVariable(index)) && isCloseParenthesis(index - 1)) {
                 operators.add("*");
             } //Rewrite negative signs as -1 * operand
             else if (isNegativeSign(index)) {
                 operators.add("*");
-            } else if (index != 0 && expArr[index] == variable && expArr[index - 1] == variable) {
+            } else if (index != 0 && isVariable(index) && isVariable(index - 1)) {
                 operators.add("*");
             }
         }
@@ -459,8 +460,8 @@ public class Expression {
     }
 
     public boolean isVariable(int index) {
-        for(int i = 0; i < variables.length; i++) {
-            if(expArr[index] == variables[i]) {
+        for(int i = 0; i < variables.size(); i++) {
+            if(expArr[index] == variables.get(i)) {
                 return true;
             }
         }
@@ -518,5 +519,9 @@ public class Expression {
         }
 
         return true;
+    }
+
+    public List<String> getErrors() {
+        return errors;
     }
 }

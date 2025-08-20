@@ -35,11 +35,21 @@
  */
 package com.allenfeng.personal_website.math;
 
+import java.util.ArrayList;
+
 public class IterMethods {
     //private static boolean radians = true;
     //private static boolean degrees = false;
     //private static boolean gradians = false;
     private static Expression function, derivative;
+
+    public static void main(String[] args) {
+        ArrayList<Character> vars = new ArrayList<>();
+        vars.add('x');
+        function = new Expression("-x + -(5 * -x)", vars);
+        derivative = new Expression("4", vars);
+    }
+
 
     public static double nMethod(Expression function, Expression derivative, double input) {
         //System.out.println(function.eval(input));

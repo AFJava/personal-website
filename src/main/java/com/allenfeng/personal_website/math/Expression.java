@@ -23,9 +23,11 @@ public class Expression {
         this.variables = variables;
         this.expression = expression.replaceAll(" ", "");
         expArr = this.expression.toCharArray();
-        
-        operators = findOperators();
+
+        //Crucial that operands are found first because this also populates the set of constants, and findOperators() can only function when this has been achieved
+        //TODO: this COULD be resolved by changing any isVariable() calls in findOperators to use Character.isLetter() instead
         operands = findOperands();
+        operators = findOperators();
 
         errors = testValidInput();
 
@@ -231,7 +233,7 @@ public class Expression {
                 //Replace closing parenthesis in operands with the evaluated parenthetical, delete everything before it
                 if (operators.get(first).contains("-")) {
                     operands.set(last + 1, Double.toString(0 - pExp.eval())); 
-                }else {
+                } else {
                     operands.set(last + 1, Double.toString(pExp.eval()));
                 }
 
@@ -361,7 +363,7 @@ public class Expression {
                 operands.add(Character.toString(ch));
             } else if(Character.isLetter(ch)) { //Any other letter is considered a constant
                 constants.add(ch);
-                operands.add(ch);
+                operands.add(String.valueOf(ch));
             } else if (isOperand(index)) { //If current char is a digit or decimal point (part of a number)
                 //add first digit to token
                 token.append(ch);
@@ -372,7 +374,7 @@ public class Expression {
                 }
 
                 operands.add(token.toString());
-            } else if (isParenthesis(index)) { //TODO check this too
+            } else if (isParenthesis(index)) { //Needed in both operands/operator lists to maintain order of operations
                 operands.add(Character.toString(ch));
             }
         }

@@ -31,6 +31,9 @@ main {
 }
 
 article {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 20% 80%;
     border-width: thin;
     border-color: slategray;
     border-style: solid;
@@ -54,6 +57,7 @@ h1 {
 }
 
 h2 {
+    text-align: center;
     color: rgb(255, 90, 30);
     font-size: 56px;
 }
@@ -99,12 +103,45 @@ img {
     border-width: thick;
     border-color: coral;
     border-style: solid;
-    margin: 1rem;
+    margin: 2rem;
 }
 
-#calculatorPrevImg {
-    height: 5rem;
-    width: 8rem;
+#Allen {
+    width: 14vw;
+    aspect-ratio: 28 / 45;
+}
+
+/*For project article grid alignment*/
+.projTitle {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.projDesc {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.previewImg {
+    justify-content: center;
+    align-self: center;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    width: 30vw;
+    aspect-ratio: 4 / 3;
+}
+
+
+/*Resume alignment*/
+#Resume {
+    display: grid;
+    place-items: center;
+}
+
+.pdf {
+    width: 50vw;
+    height: 85vh;
+    padding-bottom: 1rem;
 }
 
 .calculatorExImg {

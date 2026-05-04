@@ -1,3 +1,4 @@
+/*Page formatting*/
 body {
     min-height: 100vh;
     margin: 0;
@@ -13,16 +14,6 @@ header {
     padding: 2rem;
 }
 
-.topnav a {
-    text-align: center;
-    padding: 14px 16px;
-    overflow: hidden;
-    color: coral;
-    text-indent: 2rem;
-    text-decoration: none;
-    font-size: 32px;
-}
-
 main {
     flex-grow: 1;
     background-color: aliceblue;
@@ -34,7 +25,7 @@ article {
     display: grid;
     grid-template-columns: 60% 40%;
     grid-template-rows: 20% 80%;
-    border-width: thin;
+    border-width: medium;
     border-color: slategray;
     border-style: solid;
     overflow: hidden;
@@ -45,6 +36,14 @@ article {
 footer {
     background-color: seashell;
     padding: 2rem;
+}
+
+.contact {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    align-items: center;
 }
 
 /*Text formatting*/
@@ -68,7 +67,7 @@ h3 {
 }
 
 /*All non-header text gets this styling*/
-p, form, input, button, li, table {
+p, a, form, input, button, li, table {
     color: black;
     line-height: 165%;
     font-size: 24px;
@@ -80,21 +79,24 @@ p {
     padding-right: 2rem;
 }
 
-table {
-    margin: 0 auto;
-    max-width: 70%;
+a {
+    color:blue;
 }
 
-.sideways {
-    writing-mode: vertical-rl;
-}
-
-.centered {
+.topnav a {
     text-align: center;
+    padding: 14px 16px;
+    overflow: hidden;
+    color: coral;
+    text-indent: 2rem;
+    text-decoration: none;
+    font-size: 32px;
 }
 
-.side-header {
-    width: 2.5rem;
+.contact a {
+    grid-column: 2;
+    padding-left: 1vw;
+    width: fit-content;
 }
 
 /*Images*/
@@ -106,9 +108,20 @@ img {
     margin: 2rem;
 }
 
+/*Picture of self*/
 #Allen {
     width: 14vw;
     aspect-ratio: 28 / 45;
+}
+
+/*For icons in contact section*/
+.icon {
+    grid-column: 1;
+    aspect-ratio: 1 / 1;
+    height: 5vh;
+    border-color: transparent;
+    margin: 0%;
+    padding-right: 1vw;
 }
 
 /*For project article grid alignment*/
@@ -131,7 +144,6 @@ img {
     aspect-ratio: 4 / 3;
 }
 
-
 /*Resume alignment*/
 #Resume {
     display: grid;
@@ -144,15 +156,7 @@ img {
     padding-bottom: 1rem;
 }
 
-.calculatorExImg {
-    height: 30rem;
-    width: 30rem;
-    margin: 0 auto;
-    float: none;
-    display: block;
-}
-
-/*calculator page split screen/grid layout - may change if other split screens needed on other pages*/
+/*CALCULATOR PAGE split screen/grid layout - may change if other split screens needed on other pages*/
 .split-grid {
     padding: 0; /* Override main padding */
     display: grid;

@@ -1,29 +1,16 @@
-# ---- Build stage ----
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-WORKDIR /workspace
-
-# Cache dependencies
-COPY pom.xml .
-RUN mvn -q -B -DskipTests dependency:go-offline
-
-# Copy the source and build
-COPY src ./src
-RUN mvn -q -B -DskipTests package
-
-# ---- Runtime stage ----
-FROM eclipse-temurin:21-jre AS runtime
+# Build stage
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Create non-root user
-RUN useradd -m appuser
-USER appuser
+# Run stage
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Copy fat JAR
-COPY --from=build /workspace/target/*.jar app.jar
-
-# Cloud Run requires the app to listen on $PORT
+# Cloud Run requires this
 ENV PORT=8080
 EXPOSE 8080
 
-# Spring Boot automatically respects -Dserver.port
-ENTRYPOINT ["java","-Dserver.port=${PORT}","-jar","/app/app.jar"]
+CMD ["java", "-jar", "app.jar"]

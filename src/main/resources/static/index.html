@@ -42,17 +42,31 @@
                 <img src="assets/Calculator.png" class="preview-img">
 
                 <div class="proj-desc">
-                    <p>This Java program takes a user's single-variable function as input, then validates the input and
+                    <p>
+                        This Java program takes a user's single-variable function as input, then validates the input and
                         stores it as an Expression object. The user is then prompted for a starting point and the number
                         of iterations to run Newton's method, and the program uses Newton's method to find the zeroes of
-                        the function. </p>
-                    <p>Click <a href="/calculator">here</a> to try it out for yourself.</p>
+                        the function.
+                    </p>
+                    <p>Click <a href="/calculator">here</a> to try it out for yourself, or <a href="https://github.com/AFJava/personal-website" target="_blank">here</a> to view the source code on GitHub.</p>
                 </div>
 
             </article>
 
             <article id="gamerecs">
-                <h3 class="proj-title"></h3>
+                <h3 class="proj-title">GameRecs</h3>
+                <img src="assets/Gamerecs.png" class="preview-img">
+
+                <div class="proj-desc">
+                    <p>
+                        A personalized game recommendation web application that generates recommendations based on users' game ratings and preferences. Built with Spring Boot, HTML/CSS, and vanilla JS. <br><br>
+                        Users rate games they have played to add them to their personal game catalogue. Features of each game receive a score, which accumulates as a user adds more games with those features.
+                        Top features are used to define the recommendation candidate pool from IGDB (which supplies all game metadata), and a random subset of this pool is chosen for each recommendation batch.
+                        Recommendations are then scored and ranked based on the sum of the scores of their features. <br><br>
+                        When a user views a recommended game, it accumulates recommendation pressure once per batch generation. This pressure is subtracted from its score the next time it is recommended and decays over time, encouraging fresh recommendations without permanently suppressing relevant games.
+                    </p>
+                    <p>Click <a href="https://game-recs-458895861469.us-east5.run.app/" target="_blank">here</a> to try it out for yourself, or <a href="https://github.com/AFJava/gamerecs" target="_blank">here</a> to view the source code on GitHub.</p>
+                </div>
             </article>
 
             <!--

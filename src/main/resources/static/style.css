@@ -109,7 +109,7 @@ img {
 }
 
 /*Picture of self*/
-#Allen {
+#allen {
     width: 14vw;
     aspect-ratio: 28 / 45;
 }
@@ -125,17 +125,17 @@ img {
 }
 
 /*For project article grid alignment*/
-.projTitle {
+.proj-title {
     grid-row: 1;
     grid-column: 1;
 }
 
-.projDesc {
+.proj-desc {
     grid-row: 2;
     grid-column: 1;
 }
 
-.previewImg {
+.preview-img {
     justify-content: center;
     align-self: center;
     grid-row-start: 1;
@@ -145,7 +145,7 @@ img {
 }
 
 /*Resume alignment*/
-#Resume {
+#resume {
     display: grid;
     place-items: center;
 }
@@ -183,7 +183,7 @@ img {
     background-color: aliceblue;
 }
 
-.charInput {
+.char-input {
     text-align: center;
     width: 0.75rem;
 }

@@ -1,123 +1,144 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Allen's Webpage</title>
-        <link rel="stylesheet" th:href="@{/style.css(v=${#dates.createNow().time})}">
-        <script th:src = "@{/sync.js}"></script>
-    </head>
 
-    <body>
-        <header>
-            <h1>Allen's Webpage</h1>
-            
-            <div class = "topnav">
-                <a href = "index.html">Back to Home Page</a>
-            </div>
-        </header>
-        
-        <main class = "split-grid">
-            <div class = "top">
-                <p>
-                    Newton's method is an iterative process that allows one to find the roots of a function. Supposing our function is some f(x), we start with an initial x value x<sub>0</sub>.
-                    Then we find the tangent line of the function at that point, which can be written as f<sub>0</sub>(x) = f(x<sub>0</sub>) + f'(x<sub>0</sub>)(x - x<sub>0</sub>). From here, there are four possibilities, outlined in the tbale below.
-                </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allen's Webpage</title>
+    <link rel="stylesheet" th:href="@{/style.css(v=${#dates.createNow().time})}">
+    <script th:src="@{/sync.js}"></script>
+</head>
 
-                <!--Maybe add some images to help visualize-->
-                <table border = "1">
-                    <tr>
-                        <th rowspan="2" colspan="2"></th>
-                        <th colspan="2">Function</th>
-                    </tr>
-                    <tr class="centered">
-                        <td>+</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <th rowspan="2" class="sideways">Derivative</th>
-                        <td class="centered side-header">+</td>
-                        <td>
-                            The function value is positive, and the slope of the tangent line is positive, so to find the zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.
-                            <img src = "assets/Example++.png" class="calculatorExImg">
-                        </td>
-                        <td>
-                            The function value is negative, and the slope of the tangent line is positive, so to find the zero of the tangent line, we must increase x, bringing us closer to the zero of the function.
-                            <img src = "assets/Example-+.png" class="calculatorExImg">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="centered side-header">-</td>
-                        <td>
-                            The function value is positive, and the slope of the tangent line is negative. so to find the zero of the tangent line, we must increase x, bringing us closer to the zero of the function.
-                            <img src = "assets/Example+-.png" class="calculatorExImg">
-                        </td>
-                        <td>
-                            The function value is negative, and the slope of the tangent line is negative, so to find the zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.
-                            <img src = "assets/Example--.png" class="calculatorExImg">
-                        </td>
-                    </tr>
-                </table>
+<body>
+    <header>
+        <h1>Allen's Webpage</h1>
 
-                <p>
-                    We can see that in each case, the root of the line tangent to the function at x<sub>0</sub> is closer to the root of the function than x<sub>0</sub> itself.
-                    We can call the root of this tangent line x<sub>1</sub> and repeat this process, observing once again that the root of the tangent line at x<sub>1</sub> is closer to the root of the function.
-                    In other words, we can approach a root of the function by repeatedly finding the x-intercepts of its tangent lines.    
-                </p> <br>
-                <p>
-                    This calculator takes user-defined functions and stores them in an Expression class, where the inputs are validated and processed.
-                    Once the expression has been split into operators and operands, it evaluates the function and its derivative at the user's starting value,
-                    starting by substituting the starting value into the variable of the expression (if it exists), then recursively evaluating parenthetical expressions,
-                    starting with the innermost. The function and derivatives' values at the point are then used to execute an iteration of Newton's Method.
-                </p>
-            </div>
-            
-            <div class = "left">
-                <form th:action = "@{/calculator}" method = "post">
-                    Function: <input type = "text" name = "funcName" maxlength = "1" value = "f" class = "charInput" id = "fn1" required>(<input type = "text" name = "varName" maxlength = "1" value = "x" class = "charInput" id = "var1" required>) = <input type = "text" name = "function" placeholder = "e.g. 5x^2 - 2x - 3" required> <br>
-                    <ul th:if = "${functionErr}">
-                        <li th:each = "e : ${functionErr}" th:text = "${e}"></li>
-                    </ul>
-                    Derivative: <input type = "text" name = "funcName2" maxlength = "1" value = "f" class = "charInput" id = "fn2" required>'(<input type = "text" name = "varName2" maxlength = "1" value = "x" class = "charInput" id = "var2" required>) = <input type = "text" name = "derivative" placeholder = "e.g. 10x - 2" required> <br>
-                    <ul th:if = "${derErr}">
-                        <li th:each = "e : ${derErr}" th:text = "${e}"></li>
-                    </ul>
+        <div class="topnav">
+            <a href="index.html">Back to Home Page</a>
+        </div>
+    </header>
 
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            const fn1 = document.getElementById("fn1");
-                            const fn2 = document.getElementById("fn2");
-                            const v1 = document.getElementById("var1");
-                            const v2 = document.getElementById("var2");
+    <main class="split-grid">
+        <div class="top">
+            <p>
+                Newton's method is an iterative process that allows one to find the roots of a function. Supposing our
+                function is some f(x), we start with an initial x value x<sub>0</sub>.
+                Then we find the tangent line of the function at that point, which can be written as f<sub>0</sub>(x) =
+                f(x<sub>0</sub>) + f'(x<sub>0</sub>)(x - x<sub>0</sub>). From here, there are four possibilities,
+                outlined in the tbale below.
+            </p>
 
-                            function link(a, b) {
-                                a.addEventListener("input", () => { b.value = a.value; });
-                                b.addEventListener("input", () => { a.value = b.value; });
-                            }
+            <!--Maybe add some images to help visualize-->
+            <table border="1">
+                <tr>
+                    <th rowspan="2" colspan="2"></th>
+                    <th colspan="2">Function</th>
+                </tr>
+                <tr class="centered">
+                    <td>+</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="sideways">Derivative</th>
+                    <td class="centered side-header">+</td>
+                    <td>
+                        The function value is positive, and the slope of the tangent line is positive, so to find the
+                        zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.
+                        <img src="assets/Example++.png" class="calculatorExImg">
+                    </td>
+                    <td>
+                        The function value is negative, and the slope of the tangent line is positive, so to find the
+                        zero of the tangent line, we must increase x, bringing us closer to the zero of the function.
+                        <img src="assets/Example-+.png" class="calculatorExImg">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="centered side-header">-</td>
+                    <td>
+                        The function value is positive, and the slope of the tangent line is negative. so to find the
+                        zero of the tangent line, we must increase x, bringing us closer to the zero of the function.
+                        <img src="assets/Example+-.png" class="calculatorExImg">
+                    </td>
+                    <td>
+                        The function value is negative, and the slope of the tangent line is negative, so to find the
+                        zero of the tangent line, we must decrease x, bringing us closer to the zero of the function.
+                        <img src="assets/Example--.png" class="calculatorExImg">
+                    </td>
+                </tr>
+            </table>
 
-                            link(fn1, fn2);
-                            link(v1, v2);
-                            link(v2, v3);
-                        })
-                    </script>
-                    
-                    Starting point: <input type = "text" name = "varName3" maxlength = "1" value = "x" class = "charInput" id = "var3" required> = <input type = "number" name = "value" required> <br>
-                    Iterations: <input type = "number" name = "iterations" required> <br>
-                    <button type = "submit">Run</button>
-                </form>
-                
-                <p th:if = "${maxIterMsg}" th:text = "${maxIterMsg}"></p>
-            </div>
+            <p>
+                We can see that in each case, the root of the line tangent to the function at x<sub>0</sub> is closer to
+                the root of the function than x<sub>0</sub> itself.
+                We can call the root of this tangent line x<sub>1</sub> and repeat this process, observing once again
+                that the root of the tangent line at x<sub>1</sub> is closer to the root of the function.
+                In other words, we can approach a root of the function by repeatedly finding the x-intercepts of its
+                tangent lines.
+            </p> <br>
+            <p>
+                This calculator takes user-defined functions and stores them in an Expression class, where the inputs
+                are validated and processed.
+                Once the expression has been split into operators and operands, it evaluates the function and its
+                derivative at the user's starting value,
+                starting by substituting the starting value into the variable of the expression (if it exists), then
+                recursively evaluating parenthetical expressions,
+                starting with the innermost. The function and derivatives' values at the point are then used to execute
+                an iteration of Newton's Method.
+            </p>
+        </div>
 
-            <div class = "right">
-                <p th:if = ${#lists.isEmpty(nOutput)}>Your output will appear here when you run the program.</p>
-                <ul th:if = "${nOutput}">
-                    <li th:each = "e : ${nOutput}" th:text = "${e}"></li>
+        <div class="left">
+            <form th:action="@{/calculator}" method="post">
+                Function: <input type="text" name="funcName" maxlength="1" value="f" class="char-input" id="fn1"
+                    required>(<input type="text" name="varName" maxlength="1" value="x" class="char-input" id="var1"
+                    required>) = <input type="text" name="function" placeholder="e.g. 5x^2 - 2x - 3" required> <br>
+                <ul th:if="${functionErr}">
+                    <li th:each="e : ${functionErr}" th:text="${e}"></li>
                 </ul>
-            </div>
-        </main>
+                Derivative: <input type="text" name="funcName2" maxlength="1" value="f" class="char-input" id="fn2"
+                    required>'(<input type="text" name="varName2" maxlength="1" value="x" class="char-input" id="var2"
+                    required>) = <input type="text" name="derivative" placeholder="e.g. 10x - 2" required> <br>
+                <ul th:if="${derErr}">
+                    <li th:each="e : ${derErr}" th:text="${e}"></li>
+                </ul>
 
-        
-    </body>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const fn1 = document.getElementById("fn1");
+                        const fn2 = document.getElementById("fn2");
+                        const v1 = document.getElementById("var1");
+                        const v2 = document.getElementById("var2");
+
+                        function link(a, b) {
+                            a.addEventListener("input", () => { b.value = a.value; });
+                            b.addEventListener("input", () => { a.value = b.value; });
+                        }
+
+                        link(fn1, fn2);
+                        link(v1, v2);
+                        link(v2, v3);
+                    })
+                </script>
+
+                Starting point: <input type="text" name="varName3" maxlength="1" value="x" class="char-input" id="var3"
+                    required> = <input type="number" name="value" required> <br>
+                Iterations: <input type="number" name="iterations" required> <br>
+                <button type="submit">Run</button>
+            </form>
+
+            <p th:if="${maxIterMsg}" th:text="${maxIterMsg}"></p>
+        </div>
+
+        <div class="right">
+            <p th:if=${#lists.isEmpty(nOutput)}>Your output will appear here when you run the program.</p>
+            <ul th:if="${nOutput}">
+                <li th:each="e : ${nOutput}" th:text="${e}"></li>
+            </ul>
+        </div>
+    </main>
+
+
+</body>
+
 </html>

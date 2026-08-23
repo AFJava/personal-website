@@ -1,68 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Allen's Webpage</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
 
-    <body>
-        <header>
-            <div class = "topnav">
-                <a href = "#Resume">Resume</a>
-                <a href = "#Projects">Projects</a>
-                <a href = "#Contact">Contact Me</a>
-            </div>
-            
-            <h1>Allen's Webpage</h1>
-            
-            <section id = "About">
-                <img src = "assets/Me.png" id = "Allen">
-                <p>Hi, my name is Allen Feng, and I am a computer science & physics student at Duke in the Class of 2028. </p>
-                <p>I enjoy gaming, playing chess, and making music. I am also a percussionist in the Duke University Wind Symphony. </p>
-            </section>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allen's Webpage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        <main>
-            <section id = "Resume">
-                <h2>Resume</h2>
+<body>
+    <header>
+        <div class="topnav">
+            <a href="#resume">Resume</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact Me</a>
+        </div>
 
-                <embed src = "assets/Allen Feng Resume (2026).pdf" class = "pdf">
-            </section>
+        <h1>Allen's Webpage</h1>
 
-            <section id = "Projects">
-                <h2>Projects</h2>
+        <section id="About">
+            <img src="assets/Me.png" id="allen">
+            <p>Hi, my name is Allen Feng, and I am a computer science & physics student at Duke in the Class of 2028.
+            </p>
+            <p>I enjoy gaming, playing chess, and making music. I am also a percussionist in the Duke University Wind
+                Symphony. </p>
+        </section>
+    </header>
 
-                <article id = "calculator">
-                    <h3 class = "projTitle">Newton's Method calculator</h3>
-                    <img src = "assets/Calculator.png" class = "previewImg">
-                    
-                    <div class = "projDesc">
-                        <p>This Java program takes a user's single-variable function as input, then validates the input and stores it as an Expression object. The user is then prompted for a starting point and the number of iterations to run Newton's method, and the program uses Newton's method to find the zeroes of the function. </p>
-                        <p>Click <a href = "/calculator">here</a> to try it out for yourself.</p>
-                    </div>
-                    
-                </article>
-                
-                <!--
+    <main>
+        <section id="resume">
+            <h2>Resume</h2>
+
+            <embed src="assets/Allen Feng Resume (2026).pdf" class="pdf">
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+
+            <article id="calculator">
+                <h3 class="proj-title">Newton's Method calculator</h3>
+                <img src="assets/Calculator.png" class="preview-img">
+
+                <div class="proj-desc">
+                    <p>This Java program takes a user's single-variable function as input, then validates the input and
+                        stores it as an Expression object. The user is then prompted for a starting point and the number
+                        of iterations to run Newton's method, and the program uses Newton's method to find the zeroes of
+                        the function. </p>
+                    <p>Click <a href="/calculator">here</a> to try it out for yourself.</p>
+                </div>
+
+            </article>
+
+            <article id="gamerecs">
+                <h3 class="proj-title"></h3>
+            </article>
+
+            <!--
                 <article id = "lorentz">
                     <h3>Modeling Lorentz Force (Fortran 95)</h3>
                 </article>
                 -->
-            </section>
-        </main>
-        
-        <footer id = "Contact">
-            <h2>Contact Me: </h2>
-            
-            <div class = "contact">
-                <img src = "assets/Mail Icon.png" class = "icon">
-                <a href = "mailto:allen.feng@duke.edu" target = "_blank">allen.feng@duke.edu</a>
+        </section>
+    </main>
 
-                <img src = "assets/LinkedIn Icon.png" class = "icon">
-                <a href = "https://www.linkedin.com/in/allen-feng-77b525338" target = "_blank">LinkedIn</a>
-            </div>
-        </footer>
-    </body>
+    <footer id="contact">
+        <h2>Contact Me: </h2>
+
+        <div class="contact">
+            <img src="assets/Mail Icon.png" class="icon">
+            <a href="mailto:allen.feng@duke.edu" target="_blank">allen.feng@duke.edu</a>
+
+            <img src="assets/LinkedIn Icon.png" class="icon">
+            <a href="https://www.linkedin.com/in/allen-feng-77b525338" target="_blank">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+
 </html>

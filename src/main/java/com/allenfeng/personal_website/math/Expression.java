@@ -64,12 +64,7 @@ public class Expression {
     public Expression() {};
 
         /*
-         * Evaluates a function from left to right.
-         * Order of operations will be implemented... eventually.
-         * 10-3-22 Actually sorta works
-         * 10-4-22 It works!
-         * 
-         * The function can NOT have any spaces.
+         * Evaluates a function from left to right. The function can NOT have any spaces.
          * 
          * @param function   the function to evaluate for variable = input
          * @param input      the value to evaluate the function at
@@ -185,11 +180,7 @@ public class Expression {
     }
 
     /*
-         * Evaluates an expression from left to right.
-         * Order of operations will be implemented eventually.
-         * 10-3-22 Almost done
-         * 10-4-22 Order of operations works
-         * The function can NOT have any spaces.
+         * Evaluates an expression from left to right. The function can NOT have any spaces.
          * 
          * @param expression   the expression to evaluate
      */
@@ -298,10 +289,7 @@ public class Expression {
     }
 
     /*
-     * Returns an ArrayList<String> containing all of the operators in a function.
-     * The function can NOT have any spaces. Remove all spaces before passing to this function.
-     * 10-3-22 Negative numbers implemented
-     * 12-31-24 Implemented helper methods to better check for negative signs
+     * Returns an ArrayList<String> containing all of the operators in a function. The function can NOT have any spaces.
      *
      * @param function   the function to find the operators of
      * @return ArrayList of operators
@@ -338,13 +326,10 @@ public class Expression {
     }
 
     /*
-         * Returns an ArrayList<String> containing all of the operands in a function.
-         * Type String for easier concatenation later.
-         * The function can NOT have any spaces.
-         * 10-3-22 Negative numbers implemented
-         * 12-31-24 Implemented helper methods to better check for negative signs
-         * 
-         * @param function   the function to find the operands of
+     * Returns an ArrayList<String> containing all of the operands in a function (type String for easier concatenation later).
+     * The function can NOT have any spaces.
+     * 
+     * @param function   the function to find the operands of
      */
     public ArrayList<String> findOperands() {
         ArrayList<String> operands = new ArrayList<>();
